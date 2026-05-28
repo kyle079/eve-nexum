@@ -6464,6 +6464,50 @@ select.sig-toolbar-btn option {
   padding: 6px 8px;
 }
 
+.layout--compact .system-node__npc-type,
+.layout--compact .system-node__statics,
+.layout--compact .system-node__incursion-badge,
+.layout--compact .system-node__insurgency-badge {
+  display: none;
+}
+
+.layout--compact .system-node__name {
+  font-size: calc(12px * var(--font-scale, 1));
+}
+
+.layout--compact .system-node__icons {
+  gap: 2px;
+}
+
 .layout--standard .system-node {
   min-width: 130px;
+}
+
+.layout--standard .system-node__statics {
+  display: none;
+}
+
+/* ── Touch adaptations ─────────────────────────────────── */
+.layout--compact .toolbar__toggle--icon,
+.layout--standard .toolbar__toggle--icon {
+  min-width: 36px;
+  min-height: 36px;
+}
+
+.layout--compact .sys-btn,
+.layout--standard .sys-btn {
+  min-height: 36px;
+  padding: 6px 10px;
+}
+
+.layout--compact .system-handle,
+.layout--standard .system-handle {
+  width: 12px;
+  height: 12px;
+}
+
+.layout--compact .sidebar .scout-row,
+.layout--standard .sidebar .scout-row {
+  padding: 10px 12px;
+  min-height: 44px;
 }
