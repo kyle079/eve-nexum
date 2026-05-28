@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-27T16:23:00Z",
+  "title": "Design System: EVE Nexum",
+  "extensions": {
+    "colorMeta": {
+      "void": { "role": "neutral", "displayName": "Void", "canonical": "oklch(7% 0.01 270)", "tonalRamp": ["#030408", "#08090f", "#0d1117", "#111827", "#1a2240", "#2a3a5a", "#3a4a6a", "#5a6a8a"] },
+      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "oklch(11% 0.01 260)", "tonalRamp": ["#08090f", "#0d1117", "#111827", "#141c2e", "#1a2240", "#2a3a5a", "#3a4a6a", "#5a6a8a"] },
+      "surface-raised": { "role": "neutral", "displayName": "Surface Raised", "canonical": "oklch(14% 0.015 255)", "tonalRamp": ["#0a0e1a", "#0d1117", "#111827", "#1a2240", "#253050", "#2e4a7a", "#3a6abf", "#5b9bff"] },
+      "signal-blue": { "role": "primary", "displayName": "Signal Blue", "canonical": "oklch(70% 0.14 250)", "tonalRamp": ["#0d1a30", "#1d3a6b", "#2e4a7a", "#3a6abf", "#5b9bff", "#7ab4f0", "#a0ccf8", "#c8e0ff"] },
+      "brand-purple": { "role": "secondary", "displayName": "Brand Purple", "canonical": "oklch(45% 0.3 300)", "tonalRamp": ["#1a0840", "#2d1070", "#4a18a0", "#6620d0", "#863bff", "#a060ff", "#b888ff", "#d4b8ff"] },
+      "brand-cyan": { "role": "secondary", "displayName": "Brand Cyan", "canonical": "oklch(75% 0.12 220)", "tonalRamp": ["#0a2840", "#153860", "#205080", "#2d70a0", "#47bfff", "#70d0ff", "#98e0ff", "#c0f0ff"] },
+      "status-online": { "role": "tertiary", "displayName": "Status Online", "canonical": "oklch(80% 0.18 155)", "tonalRamp": ["#0a2818", "#153828", "#205038", "#2d7048", "#3ddc84", "#60e8a0", "#88f0b8", "#b0f8d4"] },
+      "status-hostile": { "role": "tertiary", "displayName": "Status Hostile", "canonical": "oklch(55% 0.18 25)", "tonalRamp": ["#2a0808", "#501818", "#703030", "#904848", "#e05a5a", "#e88080", "#f0a0a0", "#f8c8c8"] },
+      "status-warning": { "role": "tertiary", "displayName": "Status Warning", "canonical": "oklch(75% 0.16 75)", "tonalRamp": ["#2a1800", "#503000", "#705000", "#907000", "#f0a030", "#f5b860", "#fad090", "#ffe8c0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Panel titles, modal headings. Largest text in the product." },
+      "body": { "displayName": "Body", "purpose": "Default text. Signatures, descriptions, timestamps. 13px is deliberate for density." },
+      "label": { "displayName": "Label", "purpose": "Status badges, tab labels, toolbar items. Dense UI workhorses." }
+    },
+    "shadows": [
+      { "name": "tooltip", "value": "0 4px 12px rgba(0, 0, 0, 0.6)", "purpose": "Tight separation for tooltips floating over content." },
+      { "name": "dropdown", "value": "0 8px 24px rgba(0, 0, 0, 0.5)", "purpose": "Wider spread for menus and popovers." },
+      { "name": "node-glow-hover", "value": "0 0 12px color-mix(in srgb, var(--class-color) 30%, transparent)", "purpose": "Map node hover halo. Color-coded by wormhole class." },
+      { "name": "node-glow-selected", "value": "0 0 16px color-mix(in srgb, var(--class-color) 40%, transparent)", "purpose": "Intensified glow on selected map nodes." },
+      { "name": "status-led", "value": "0 0 4px currentColor", "purpose": "Subtle glow on 6px status indicator dots." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "120ms ease", "purpose": "Background/border transitions on hover. Buttons, toolbar toggles." },
+      { "name": "state-normal", "value": "150ms ease", "purpose": "Border-color and box-shadow transitions. System nodes." },
+      { "name": "state-slow", "value": "200ms ease-in-out", "purpose": "Opacity and filter transitions. Stale node fade, panel collapse." }
+    ],
+    "breakpoints": []
+  },
+  "components": [
+    {
+      "name": "Toolbar Toggle",
+      "kind": "button",
+      "refersTo": "toolbar-toggle",
+      "description": "Primary button pattern. Compact toggle in the 48px toolbar bar.",
+      "html": "<button class=\"ds-toolbar-toggle\">Systems</button>",
+      "css": ".ds-toolbar-toggle { background: transparent; color: #6a7898; border: none; padding: 4px 10px; border-radius: 4px; font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 120ms ease, color 120ms ease; } .ds-toolbar-toggle:hover { background: #141c2e; color: #c8d0e0; } .ds-toolbar-toggle:focus-visible { outline: 1px solid #5a9af8; outline-offset: 1px; }"
+    },
+    {
+      "name": "Toolbar Toggle Active",
+      "kind": "button",
+      "refersTo": "toolbar-toggle-active",
+      "description": "Active/on state of toolbar toggle.",
+      "html": "<button class=\"ds-toolbar-toggle ds-toolbar-toggle--on\">Systems</button>",
+      "css": ".ds-toolbar-toggle--on { background: #0d1a30; color: #5b9bff; } .ds-toolbar-toggle--on:hover { background: #141c2e; color: #7ab4f0; }"
+    },
+    {
+      "name": "Toolbar Toggle Prominent",
+      "kind": "button",
+      "refersTo": "toolbar-toggle",
+      "description": "Visually heavier variant for important actions.",
+      "html": "<button class=\"ds-toolbar-toggle ds-toolbar-toggle--prominent\">Sign Out</button>",
+      "css": ".ds-toolbar-toggle--prominent { background: #2a3a5a; color: #e2e8f8; } .ds-toolbar-toggle--prominent:hover { background: #3a4a6a; color: #e2e8f8; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Standard form input. Dark inset background, subtle border.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Search systems...\" />",
+      "css": ".ds-input { background: #0a0e1a; color: #c8d0e0; border: 1px solid #1e2740; border-radius: 6px; padding: 6px 10px; font-family: Inter, system-ui, sans-serif; font-size: 13px; outline: none; transition: border-color 120ms ease; } .ds-input::placeholder { color: #5a6a8a; } .ds-input:focus { border-color: #6ea0ff; } .ds-input:hover:not(:focus) { border-color: #2e4a7a; }"
+    },
+    {
+      "name": "System Node",
+      "kind": "custom",
+      "refersTo": "system-node",
+      "description": "Map canvas element representing a solar system. Border color encodes wormhole class.",
+      "html": "<div class=\"ds-system-node\" style=\"--class-color: #5b9bff;\"><div class=\"ds-system-node__name\">J154820</div><div class=\"ds-system-node__class\">C3</div></div>",
+      "css": ".ds-system-node { min-width: 150px; min-height: 80px; background: #111827; border: 1.5px solid color-mix(in srgb, var(--class-color) 40%, #1e2740); border-radius: 8px; padding: 8px 12px 10px; cursor: pointer; transition: border-color 150ms ease, box-shadow 150ms ease; position: relative; } .ds-system-node:hover { border-color: var(--class-color); box-shadow: 0 0 12px color-mix(in srgb, var(--class-color) 30%, transparent); } .ds-system-node__name { font-family: Inter, system-ui, sans-serif; font-size: 13px; font-weight: 600; color: #e2e8f8; } .ds-system-node__class { font-family: Inter, system-ui, sans-serif; font-size: 11px; color: #6a7898; margin-top: 2px; }"
+    },
+    {
+      "name": "Tooltip",
+      "kind": "custom",
+      "refersTo": "tooltip",
+      "description": "Floating label on hover. High contrast, no interaction.",
+      "html": "<div class=\"ds-tooltip\">Wormhole to C5 space</div>",
+      "css": ".ds-tooltip { background: #050810; color: #f0f4ff; border: 1px solid #4a6ea8; border-radius: 4px; padding: 4px 8px; font-family: Inter, system-ui, sans-serif; font-size: 12px; font-weight: 500; white-space: nowrap; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); pointer-events: none; }"
+    },
+    {
+      "name": "Dropdown Menu",
+      "kind": "nav",
+      "refersTo": "dropdown",
+      "description": "Floating menu for map switcher, context menus.",
+      "html": "<div class=\"ds-dropdown\"><div class=\"ds-dropdown__item\">Home Chain</div><div class=\"ds-dropdown__item ds-dropdown__item--active\">Rage Chain</div><div class=\"ds-dropdown__item\">Farm Holes</div></div>",
+      "css": ".ds-dropdown { background: #0d1117; border: 1px solid #2e4a7a; border-radius: 6px; padding: 4px 0; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); min-width: 160px; } .ds-dropdown__item { padding: 7px 12px; font-family: Inter, system-ui, sans-serif; font-size: 13px; color: #c8d0e0; cursor: pointer; transition: background 100ms ease; } .ds-dropdown__item:hover { background: #141c2e; } .ds-dropdown__item--active { color: #5b9bff; }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "toolbar-toggle",
+      "description": "Intel classification badge on system nodes and panels.",
+      "html": "<span class=\"ds-chip ds-chip--friendly\">Friendly</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-family: Inter, system-ui, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.02em; } .ds-chip--friendly { background: rgba(91, 155, 255, 0.15); color: #5b9bff; } .ds-chip--hostile { background: rgba(224, 90, 90, 0.15); color: #e05a5a; } .ds-chip--warning { background: rgba(240, 160, 48, 0.15); color: #f0a030; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The War Room Console",
+    "overview": "Nexum is mission control for wormhole operations. Every pixel serves the scanner, the FC, the scout checking chain status between fleet pings. The interface is dense and purposeful, alive with real-time data: presence indicators pulse, signatures update, connections appear and decay. Darkness is not decorative; it's the void of J-space, and the data projected onto it demands attention by contrast.\n\nThis system rejects three lineages explicitly. It is not a legacy EVE tool: no Pathfinder-era cramped tables, no PHP-admin chrome, no interfaces that feel abandoned. It is not generic SaaS: no cream backgrounds, no gentle gradients, no startup-pitch-deck neutrality. It is not gamified spectacle: no gratuitous neon, no particle effects, no trying-too-hard sci-fi that mistakes decoration for immersion. The game provides the fantasy. The tool provides clarity.\n\nThe result is a product that EVE players recognize instantly as something built by someone who maps wormholes, not something that looks like every other dashboard wearing a dark theme.",
+    "keyCharacteristics": [
+      "Dense information display optimized for multi-monitor gaming setups",
+      "Dark surfaces with high-contrast text for long sessions in dim rooms",
+      "Blue-purple signal palette tied to EVE's visual language without imitating it",
+      "Real-time presence and state changes create energy without animation",
+      "Compact, responsive controls built for speed, not discovery",
+      "User-scalable typography via --font-scale (0.8x to 1.2x)"
+    ],
+    "rules": [
+      { "name": "The Signal-Not-Decoration Rule", "body": "Saturated color always means something: a state, an action, a classification. If a color doesn't carry information, it doesn't belong. Decorative accent color is prohibited.", "section": "colors" },
+      { "name": "The Void Tint Rule", "body": "No pure black (#000) or pure white (#fff) anywhere. Every neutral is tinted toward the blue-purple hue family (chroma 0.005-0.01 in OKLCH).", "section": "colors" },
+      { "name": "The One Family Rule", "body": "Inter everywhere. No secondary typeface, no monospace for techy feel, no display font for landing page drama. Hierarchy is weight and scale, never typeface switching.", "section": "typography" },
+      { "name": "The Tabular Numbers Rule", "body": "All numeric displays use font-variant-numeric: tabular-nums. System IDs, signature counts, mass values, and timestamps must align in columns without jitter.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. If something has a shadow and it isn't floating above another layer, the shadow is wrong. Remove it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Signal Blue (#5b9bff) as the sole interactive accent in product UI.",
+      "Do communicate depth through background shade stepping (Void → Surface → Surface Raised), not shadows.",
+      "Do keep all transitions under 200ms with ease or ease-out timing.",
+      "Do tint every neutral toward blue-purple.",
+      "Do use color-mix() for dynamic tinting against class colors.",
+      "Do use font-variant-numeric: tabular-nums on any column of numbers.",
+      "Do scale all text through calc(Npx * var(--font-scale, 1))."
+    ],
+    "donts": [
+      "Don't use legacy EVE tool patterns: cramped HTML tables, inline styles, Windows-95-era form controls.",
+      "Don't adopt generic SaaS aesthetics: cream backgrounds, gentle pastel gradients, Stripe/Linear visual language.",
+      "Don't add gratuitous sci-fi decoration: neon glow effects, particle systems, animated star fields, scanline overlays.",
+      "Don't use saturated color without semantic meaning.",
+      "Don't add shadows to resting surfaces.",
+      "Don't use border-left/right greater than 1px as a colored accent stripe.",
+      "Don't use gradient text (background-clip: text).",
+      "Don't introduce a second typeface.",
+      "Don't use pure black (#000000) or pure white (#ffffff).",
+      "Don't build modal-first flows."
+    ]
+  }
+}
