@@ -1631,7 +1631,7 @@
 
 .system-node {
   min-width: 150px;
-  min-height: 80px; /* at least 4 snap-grid squares tall */
+  min-height: 48px;
   background: #111827;
   border: 1.5px solid color-mix(in srgb, var(--class-color) 40%, #1e2740);
   border-radius: 8px;
@@ -5760,6 +5760,12 @@ select.sig-toolbar-btn option {
   border-left: 3px solid;
   background: #14181f;
   color: #c8d0e0;
+  animation: toast-in 200ms ease-out;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .toast--error   { border-left-color: #f87171; background: #1a1014; }
@@ -6355,4 +6361,13 @@ select.sig-toolbar-btn option {
 .admin-page__chart-canvas {
   position: relative;
   height: 240px;
+}
+
+/* ── Viewport breakpoint ───────────────────────────────────
+   Below 1200px the app stops shrinking and scrolls instead.
+   All data stays visible — nothing hides or collapses. */
+@media (max-width: 1199px) {
+  .layout__body {
+    min-width: 1200px;
+  }
 }
