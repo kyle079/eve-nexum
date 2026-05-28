@@ -2498,20 +2498,15 @@ div.system-node__easy-handle {
   }
 }
 
-/* ── Side panel ──────────────────────────────────────────── */
+/* ── System panel (tabbed bottom dock) ──────────────────── */
 .system-panel {
   background: #0d1117;
   border-top: 1px solid #1e2740;
   display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: 12px;
-  padding: 0 16px 12px;
+  flex-direction: column;
   overflow: hidden;
   flex-shrink: 0;
   position: relative;
-
-  > .btn { align-self: flex-end; }
 }
 
 .system-panel__resize-handle {
@@ -2539,23 +2534,73 @@ div.system-node__easy-handle {
   &:hover::after { background: #5a9af8; }
 }
 
-.system-panel__left {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  flex-shrink: 0;
-  min-width: 160px;
-  padding-top: 12px;
-  padding-right: 12px;
-  border-right: 1px solid #1e2740;
-  overflow-y: auto;
-}
+/* .system-panel__left removed — tabbed layout replaces left/right split */
 
 .system-panel__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  padding: 8px 16px 0;
+  flex-shrink: 0;
+}
+
+.system-panel__identity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.system-panel__tabs {
+  display: flex;
+  gap: 2px;
+  padding: 6px 16px 0;
+  flex-shrink: 0;
+}
+
+.system-panel__tab {
+  background: transparent;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+  color: #6a7898;
+  font-family: inherit;
+  font-size: calc(12px * var(--font-scale, 1));
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease;
+}
+
+.system-panel__tab:hover {
+  color: #c8d0e0;
+  background: #141c2e;
+}
+
+.system-panel__tab--active {
+  color: #5b9bff;
+  background: #0a0e1a;
+  border-color: #1e2740;
+}
+
+.system-panel__tab-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 16px;
+  min-height: 0;
+  border-top: 1px solid #1e2740;
+}
+
+.system-panel__structures-tab,
+.system-panel__intel-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .system-panel__title {
@@ -2605,10 +2650,14 @@ div.system-node__easy-handle {
 .sys-info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   font-size: calc(13px * var(--font-scale, 1));
-  width: 400px;
-  padding-bottom: 4px;
+}
+
+.sys-info__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px 24px;
 }
 
 .sys-info__headline {
