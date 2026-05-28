@@ -172,7 +172,12 @@ function ProximityChip() {
   );
 }
 
-export function Toolbar() {
+interface ToolbarProps {
+  onMenuToggle?: () => void;
+  layout?: { tier: string; sidebarMode: string };
+}
+
+export function Toolbar({ onMenuToggle, layout }: ToolbarProps = {}) {
   const mapName         = useMapStore((s) => s.map.name);
   const mapLocked       = useMapStore((s) => !!s.map.locked);
   const systemCount     = useMapStore((s) => s.map.systems.length);
@@ -219,6 +224,15 @@ export function Toolbar() {
   return (
     <>
     <header className="toolbar">
+      {layout?.sidebarMode === 'drawer' && (
+        <button
+          className="toolbar__toggle toolbar__toggle--icon"
+          onClick={onMenuToggle}
+          aria-label="Toggle sidebar"
+        >
+          ☰
+        </button>
+      )}
       <div className="toolbar__brand">
         <span className="toolbar__logo">◈</span>
       </div>

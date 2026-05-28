@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactFlowProvider } from '@xyflow/react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { seedUserSettings, readUserSetting } from './hooks/useUserSetting';
@@ -8,6 +8,8 @@ import { ConnectionPanel } from './components/ui/ConnectionPanel';
 import { Toolbar } from './components/ui/Toolbar';
 import { MapSidebar } from './components/ui/MapSidebar';
 import { Sidebar } from './components/ui/Sidebar';
+import { DrawerSidebar } from './components/ui/DrawerSidebar';
+import { BottomSheet } from './components/ui/BottomSheet';
 import { ProximityOptInModal } from './components/ui/ProximityOptInModal';
 import { CommandPaletteModal } from './components/ui/CommandPaletteModal';
 import { LandingPage } from './components/ui/LandingPage';
@@ -19,6 +21,7 @@ import { useLocationTracking } from './hooks/useLocationTracking';
 import { useMapEventStream } from './hooks/useMapEventStream';
 import { useMapPresence } from './hooks/useMapPresence';
 import { useHashRoute } from './hooks/useHashRoute';
+import { useLayout } from './hooks/useLayout';
 import './App.css';
 
 function MapApp() {
@@ -30,6 +33,8 @@ function MapApp() {
   const applyPreferences    = useMapStore((s) => s.applyPreferences);
   const uiZoom              = useMapStore((s) => s.uiZoom);
   const resetUniformSizes   = useMapStore((s) => s.resetUniformSizes);
+  const layout              = useLayout();
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Apply the user's UI scale as a CSS custom property. App.css `font-size`
   // declarations multiply through `calc(Npx * var(--font-scale, 1))`, so
@@ -80,17 +85,45 @@ function MapApp() {
   useMapEventStream();
   useMapPresence();
 
+  const panelContent = selectedSystemId
+    ? <SystemPanel />
+    : selectedConnectionId
+      ? <ConnectionPanel />
+      : null;
+
+  const useBottomSheet = panelContent && layout.tier !== 'spacious' && layout.panelDock === 'bottom';
+  const useSidePanel   = panelContent && layout.tier !== 'spacious' && layout.panelDock === 'side';
+
   return (
     <ReactFlowProvider>
-      <div className="layout">
-        <Toolbar />
+      <div className={`layout layout--${layout.tier} layout--${layout.orientation}`}>
+        <Toolbar onMenuToggle={() => setDrawerOpen((v) => !v)} layout={layout} />
         <div className="layout__body">
-          <Sidebar />
+          {layout.sidebarMode === 'inline' ? (
+            <Sidebar />
+          ) : (
+            <DrawerSidebar open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+              <Sidebar />
+            </DrawerSidebar>
+          )}
           <div className="layout__main">
             <MapCanvas />
             <MapSidebar />
-            {selectedSystemId && <SystemPanel />}
-            {selectedConnectionId && <ConnectionPanel />}
+            {layout.tier === 'spacious' && selectedSystemId && <SystemPanel />}
+            {layout.tier === 'spacious' && selectedConnectionId && <ConnectionPanel />}
+            {useBottomSheet && (
+              <BottomSheet onDismiss={() => {
+                useMapStore.getState().selectSystem(null);
+                useMapStore.getState().selectConnection(null);
+              }}>
+                {panelContent}
+              </BottomSheet>
+            )}
+            {useSidePanel && (
+              <aside className="side-panel-overlay">
+                {panelContent}
+              </aside>
+            )}
           </div>
         </div>
       </div>

@@ -6424,3 +6424,46 @@ select.sig-toolbar-btn option {
 
 .drawer--left.drawer--open { transform: translateX(0); }
 .drawer--right.drawer--open { transform: translateX(0); }
+
+/* ── Side panel overlay (landscape non-spacious) ───────── */
+.side-panel-overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 360px;
+  background: #0d1117;
+  border-left: 1px solid #1e2740;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  box-shadow: -4px 0 16px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ── Layout tier adaptations ───────────────────────────── */
+.layout--compact .toolbar,
+.layout--standard .toolbar {
+  height: 44px;
+}
+
+.layout--compact .toolbar {
+  height: 40px;
+  padding: 0 10px;
+  gap: 10px;
+}
+
+.layout--compact .toolbar__option,
+.layout--standard .toolbar__option {
+  display: none;
+}
+
+.layout--compact .system-node {
+  min-width: 100px;
+  padding: 6px 8px;
+}
+
+.layout--standard .system-node {
+  min-width: 130px;
+}
